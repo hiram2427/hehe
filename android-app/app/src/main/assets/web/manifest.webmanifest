@@ -1,0 +1,10 @@
+{
+  "name": "哼哼的拼豆图纸",
+  "short_name": "哼哼拼豆",
+  "description": "哼哼为程程做的照片转拼豆图纸工具",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6fbff",
+  "theme_color": "#91cffa",
+  "icons": [{"src":"./favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

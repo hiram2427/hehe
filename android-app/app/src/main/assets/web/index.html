@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#91cffa">
+  <meta name="description" content="哼哼为程程做的拼豆图纸工具：把照片转换成 MARD 221 色图纸，调整豆子颗数并导出色号用量。">
+  <title>哼哼的拼豆图纸</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="哼哼的拼豆图纸首页">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>哼哼的拼豆图纸</span>
+    </a>
+    <p>照片转拼豆图纸</p>
+    <span class="privacy-pill"><span aria-hidden="true">●</span> 图片仅在本机处理</span>
+  </header>
+
+  <main class="workspace">
+    <aside class="panel controls" aria-label="图纸设置">
+      <div class="step-heading">
+      <span>01</span>
+        <div><h1>程程，选一张喜欢的照片</h1><p>JPG、PNG、WEBP，建议小于 15 MB</p></div>
+      </div>
+
+      <label class="dropzone" id="dropzone" for="fileInput">
+        <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        <span class="upload-icon" aria-hidden="true">＋</span>
+        <strong>上传一张照片</strong>
+        <span>点击选择或拖到这里</span>
+        <img id="sourceThumb" alt="已选择照片预览">
+      </label>
+
+      <section class="settings" aria-labelledby="settingsTitle">
+        <div class="step-heading compact">
+          <span>02</span>
+          <div><h2 id="settingsTitle">调整图纸</h2></div>
+        </div>
+
+        <label class="field" for="widthRange">
+          <span><b>横向豆数</b><output id="widthOutput">48 颗</output></span>
+          <input id="widthRange" type="range" min="12" max="160" value="48" step="1">
+          <small>豆子越多，细节越清晰，制作量也越大</small>
+        </label>
+
+        <label class="field" for="colorRange">
+          <span><b>最多用色</b><output id="colorOutput">24 色</output></span>
+          <input id="colorRange" type="range" min="6" max="60" value="24" step="1">
+          <small>控制需要采购和分拣的颜色种类</small>
+        </label>
+
+        <label class="switch-row" for="codeToggle">
+          <span><b>格内显示色号</b><small>放大图纸时便于逐颗摆放</small></span>
+          <input id="codeToggle" type="checkbox" checked role="switch">
+        </label>
+
+        <button class="primary-button" id="generateButton" type="button" disabled>
+          <span>生成程程的拼豆图纸</span><span aria-hidden="true">→</span>
+        </button>
+      </section>
+    </aside>
+
+    <section class="results" aria-live="polite">
+      <div class="result-header">
+        <div>
+          <span class="eyebrow">MARD · 221 标准色</span>
+          <h2>拼豆图纸</h2>
+        </div>
+        <div class="summary" id="summary" hidden>
+          <span><b id="sizeStat">—</b>尺寸</span>
+          <span><b id="beadStat">—</b>总颗数</span>
+          <span><b id="colorStat">—</b>实际用色</span>
+        </div>
+      </div>
+
+      <div class="canvas-shell" id="canvasShell">
+        <div class="empty-state" id="emptyState">
+          <div class="sample-grid" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <h3>程程的图纸会出现在这里</h3>
+          <p>先上传照片，再调整横向豆数</p>
+        </div>
+        <canvas id="patternCanvas" aria-label="拼豆图纸预览"></canvas>
+        <div class="busy" id="busy" hidden><span></span><p>正在匹配色号…</p></div>
+      </div>
+
+      <div class="actions" id="actions" hidden>
+        <button type="button" id="downloadPng">下载图纸 PNG</button>
+        <button type="button" id="downloadCsv">下载用料表 CSV</button>
+      </div>
+
+      <section class="legend" id="legendSection" hidden>
+        <div class="legend-heading">
+          <div><span class="eyebrow">03 · 备料清单</span><h2>所需拼豆色号</h2></div>
+          <p>按用量从多到少排列</p>
+        </div>
+        <div class="legend-grid" id="legendGrid"></div>
+        <p class="color-note">屏幕颜色仅作参考；实物会因批次、光线和显示设备产生色差。</p>
+      </section>
+    </section>
+  </main>
+
+  <footer><span>哼哼为程程做的小工具 ♡</span><span>不上传照片 · 不保存记录 · 无需登录</span></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>

@@ -28,3 +28,7 @@ python -m http.server 8080 -d dist
 内置色卡采用 MARD 221 色（Alfonse + 豆豆工坊核对版）。RGB/HEX 仅用于屏幕近似匹配，实体豆子会受批次、光线与显示设备影响。
 
 色卡数据整理来源：[HansBug/pindou-color-data](https://github.com/HansBug/pindou-color-data)。
+
+## 安卓 App
+
+适用于安卓手机的独立安装包已放在 [`downloads/hengheng-pindou-v1.0.0.apk`](downloads/hengheng-pindou-v1.0.0.apk)。App 内完整包含网页工具，可以离线使用；源码位于 `android-app`。
